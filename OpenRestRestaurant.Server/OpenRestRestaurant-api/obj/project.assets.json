@@ -113,6 +113,7 @@
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
           "OpenRestRestaurant-data": "1.0.0",
+          "OpenRestRestaurant-infrastructure": "1.0.0",
           "OpenRestRestaurant-models": "1.0.0"
         },
         "compile": {
@@ -130,6 +131,19 @@
         },
         "runtime": {
           "bin/placeholder/OpenRestRestaurant-data.dll": {}
+        }
+      },
+      "OpenRestRestaurant-infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "OpenRestRestaurant-data": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/OpenRestRestaurant-infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/OpenRestRestaurant-infrastructure.dll": {}
         }
       },
       "OpenRestRestaurant-models/1.0.0": {
@@ -496,6 +510,11 @@
       "path": "../OpenRestRestaurant-data/OpenRestRestaurant-data.csproj",
       "msbuildProject": "../OpenRestRestaurant-data/OpenRestRestaurant-data.csproj"
     },
+    "OpenRestRestaurant-infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../OpenRestRestaurant-infrastructure/OpenRestRestaurant-infrastructure.csproj",
+      "msbuildProject": "../OpenRestRestaurant-infrastructure/OpenRestRestaurant-infrastructure.csproj"
+    },
     "OpenRestRestaurant-models/1.0.0": {
       "type": "project",
       "path": "../OpenRestRestaurant-models/OpenRestRestaurant-models.csproj",
@@ -506,6 +525,8 @@
     "net7.0": [
       "Microsoft.AspNetCore.OpenApi >= 7.0.0",
       "OpenRestRestaurant-core >= 1.0.0",
+      "OpenRestRestaurant-data >= 1.0.0",
+      "OpenRestRestaurant-infrastructure >= 1.0.0",
       "OpenRestRestaurant-models >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
@@ -518,11 +539,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rolando\\Desktop\\Code 2022\\RestaurantSoftware\\OpenRestaurant\\OpenRestRestaurant.Server\\OpenRestRestaurant-api\\OpenRestRestaurant-api.csproj",
+      "projectUniqueName": "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-api\\OpenRestRestaurant-api.csproj",
       "projectName": "OpenRestRestaurant-api",
-      "projectPath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\RestaurantSoftware\\OpenRestaurant\\OpenRestRestaurant.Server\\OpenRestRestaurant-api\\OpenRestRestaurant-api.csproj",
+      "projectPath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-api\\OpenRestRestaurant-api.csproj",
       "packagesPath": "C:\\Users\\Rolando\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\RestaurantSoftware\\OpenRestaurant\\OpenRestRestaurant.Server\\OpenRestRestaurant-api\\obj\\",
+      "outputPath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
@@ -544,11 +565,17 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\Rolando\\Desktop\\Code 2022\\RestaurantSoftware\\OpenRestaurant\\OpenRestRestaurant.Server\\OpenRestRestaurant-core\\OpenRestRestaurant-core.csproj": {
-              "projectPath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\RestaurantSoftware\\OpenRestaurant\\OpenRestRestaurant.Server\\OpenRestRestaurant-core\\OpenRestRestaurant-core.csproj"
+            "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-core\\OpenRestRestaurant-core.csproj": {
+              "projectPath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-core\\OpenRestRestaurant-core.csproj"
             },
-            "C:\\Users\\Rolando\\Desktop\\Code 2022\\RestaurantSoftware\\OpenRestaurant\\OpenRestRestaurant.Server\\OpenRestRestaurant-models\\OpenRestRestaurant-models.csproj": {
-              "projectPath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\RestaurantSoftware\\OpenRestaurant\\OpenRestRestaurant.Server\\OpenRestRestaurant-models\\OpenRestRestaurant-models.csproj"
+            "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-data\\OpenRestRestaurant-data.csproj": {
+              "projectPath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-data\\OpenRestRestaurant-data.csproj"
+            },
+            "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-infrastructure\\OpenRestRestaurant-infrastructure.csproj": {
+              "projectPath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-infrastructure\\OpenRestRestaurant-infrastructure.csproj"
+            },
+            "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-models\\OpenRestRestaurant-models.csproj": {
+              "projectPath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-models\\OpenRestRestaurant-models.csproj"
             }
           }
         }

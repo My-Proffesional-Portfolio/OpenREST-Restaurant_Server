@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Rolando\\Desktop\\Code 2022\\RestaurantSoftware\\OpenRestaurant\\OpenRestRestaurant.Server\\OpenRestRestaurant-models\\OpenRestRestaurant-models.csproj": {}
+    "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-models\\OpenRestRestaurant-models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Rolando\\Desktop\\Code 2022\\RestaurantSoftware\\OpenRestaurant\\OpenRestRestaurant.Server\\OpenRestRestaurant-models\\OpenRestRestaurant-models.csproj": {
+    "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-models\\OpenRestRestaurant-models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Rolando\\Desktop\\Code 2022\\RestaurantSoftware\\OpenRestaurant\\OpenRestRestaurant.Server\\OpenRestRestaurant-models\\OpenRestRestaurant-models.csproj",
+        "projectUniqueName": "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-models\\OpenRestRestaurant-models.csproj",
         "projectName": "OpenRestRestaurant-models",
-        "projectPath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\RestaurantSoftware\\OpenRestaurant\\OpenRestRestaurant.Server\\OpenRestRestaurant-models\\OpenRestRestaurant-models.csproj",
+        "projectPath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-models\\OpenRestRestaurant-models.csproj",
         "packagesPath": "C:\\Users\\Rolando\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\RestaurantSoftware\\OpenRestaurant\\OpenRestRestaurant.Server\\OpenRestRestaurant-models\\obj\\",
+        "outputPath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",

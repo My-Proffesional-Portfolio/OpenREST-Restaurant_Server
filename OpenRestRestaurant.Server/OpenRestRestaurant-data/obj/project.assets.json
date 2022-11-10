@@ -15,11 +15,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rolando\\Desktop\\Code 2022\\RestaurantSoftware\\OpenRestaurant\\OpenRestRestaurant.Server\\OpenRestRestaurant-data\\OpenRestRestaurant-data.csproj",
+      "projectUniqueName": "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-data\\OpenRestRestaurant-data.csproj",
       "projectName": "OpenRestRestaurant-data",
-      "projectPath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\RestaurantSoftware\\OpenRestaurant\\OpenRestRestaurant.Server\\OpenRestRestaurant-data\\OpenRestRestaurant-data.csproj",
+      "projectPath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-data\\OpenRestRestaurant-data.csproj",
       "packagesPath": "C:\\Users\\Rolando\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\RestaurantSoftware\\OpenRestaurant\\OpenRestRestaurant.Server\\OpenRestRestaurant-data\\obj\\",
+      "outputPath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\Restaurant-backend\\OpenREST-Restaurant_Server\\OpenRestRestaurant.Server\\OpenRestRestaurant-data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",

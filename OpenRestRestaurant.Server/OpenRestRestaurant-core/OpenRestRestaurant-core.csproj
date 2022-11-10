@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OpenRestRestaurant-data\OpenRestRestaurant-data.csproj" />
+    <ProjectReference Include="..\OpenRestRestaurant-infrastructure\OpenRestRestaurant-infrastructure.csproj" />
     <ProjectReference Include="..\OpenRestRestaurant-models\OpenRestRestaurant-models.csproj" />
   </ItemGroup>
 

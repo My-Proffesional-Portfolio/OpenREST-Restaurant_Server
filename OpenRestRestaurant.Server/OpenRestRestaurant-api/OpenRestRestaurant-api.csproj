@@ -14,6 +14,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OpenRestRestaurant-core\OpenRestRestaurant-core.csproj" />
+    <ProjectReference Include="..\OpenRestRestaurant-data\OpenRestRestaurant-data.csproj" />
+    <ProjectReference Include="..\OpenRestRestaurant-infrastructure\OpenRestRestaurant-infrastructure.csproj" />
     <ProjectReference Include="..\OpenRestRestaurant-models\OpenRestRestaurant-models.csproj" />
   </ItemGroup>
 
