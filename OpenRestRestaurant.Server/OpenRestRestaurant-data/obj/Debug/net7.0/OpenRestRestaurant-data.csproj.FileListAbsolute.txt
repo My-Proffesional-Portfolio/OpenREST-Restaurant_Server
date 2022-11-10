@@ -1,0 +1,12 @@
+C:\Users\Rolando\Desktop\Code 2022\RestaurantSoftware\OpenRestaurant\OpenRestRestaurant.Server\OpenRestRestaurant-data\bin\Debug\net7.0\OpenRestRestaurant-data.deps.json
+C:\Users\Rolando\Desktop\Code 2022\RestaurantSoftware\OpenRestaurant\OpenRestRestaurant.Server\OpenRestRestaurant-data\bin\Debug\net7.0\OpenRestRestaurant-data.dll
+C:\Users\Rolando\Desktop\Code 2022\RestaurantSoftware\OpenRestaurant\OpenRestRestaurant.Server\OpenRestRestaurant-data\bin\Debug\net7.0\OpenRestRestaurant-data.pdb
+C:\Users\Rolando\Desktop\Code 2022\RestaurantSoftware\OpenRestaurant\OpenRestRestaurant.Server\OpenRestRestaurant-data\obj\Debug\net7.0\OpenRestRestaurant-data.csproj.AssemblyReference.cache
+C:\Users\Rolando\Desktop\Code 2022\RestaurantSoftware\OpenRestaurant\OpenRestRestaurant.Server\OpenRestRestaurant-data\obj\Debug\net7.0\OpenRestRestaurant-data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Rolando\Desktop\Code 2022\RestaurantSoftware\OpenRestaurant\OpenRestRestaurant.Server\OpenRestRestaurant-data\obj\Debug\net7.0\OpenRestRestaurant-data.AssemblyInfoInputs.cache
+C:\Users\Rolando\Desktop\Code 2022\RestaurantSoftware\OpenRestaurant\OpenRestRestaurant.Server\OpenRestRestaurant-data\obj\Debug\net7.0\OpenRestRestaurant-data.AssemblyInfo.cs
+C:\Users\Rolando\Desktop\Code 2022\RestaurantSoftware\OpenRestaurant\OpenRestRestaurant.Server\OpenRestRestaurant-data\obj\Debug\net7.0\OpenRestRestaurant-data.csproj.CoreCompileInputs.cache
+C:\Users\Rolando\Desktop\Code 2022\RestaurantSoftware\OpenRestaurant\OpenRestRestaurant.Server\OpenRestRestaurant-data\obj\Debug\net7.0\OpenRestRestaurant-data.dll
+C:\Users\Rolando\Desktop\Code 2022\RestaurantSoftware\OpenRestaurant\OpenRestRestaurant.Server\OpenRestRestaurant-data\obj\Debug\net7.0\refint\OpenRestRestaurant-data.dll
+C:\Users\Rolando\Desktop\Code 2022\RestaurantSoftware\OpenRestaurant\OpenRestRestaurant.Server\OpenRestRestaurant-data\obj\Debug\net7.0\OpenRestRestaurant-data.pdb
+C:\Users\Rolando\Desktop\Code 2022\RestaurantSoftware\OpenRestaurant\OpenRestRestaurant.Server\OpenRestRestaurant-data\obj\Debug\net7.0\ref\OpenRestRestaurant-data.dll

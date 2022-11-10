@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33103.201
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRestRestaurant-api", "OpenRestRestaurant.API\OpenRestRestaurant-api.csproj", "{2024F12F-A967-438E-AB18-FF64A27A78CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRestRestaurant-data", "OpenRestRestaurant-data\OpenRestRestaurant-data.csproj", "{77B0D6B2-63D0-40C2-A8EC-4303C0B6AC95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRestRestaurant-core", "OpenRestRestaurant-core\OpenRestRestaurant-core.csproj", "{6B567859-3921-4C8C-801C-8289A248728D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRestRestaurant-models", "OpenRestRestaurant-models\OpenRestRestaurant-models.csproj", "{FEDEF6F2-25F7-43BD-822F-62CD80ADDE43}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2024F12F-A967-438E-AB18-FF64A27A78CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2024F12F-A967-438E-AB18-FF64A27A78CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2024F12F-A967-438E-AB18-FF64A27A78CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2024F12F-A967-438E-AB18-FF64A27A78CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77B0D6B2-63D0-40C2-A8EC-4303C0B6AC95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77B0D6B2-63D0-40C2-A8EC-4303C0B6AC95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77B0D6B2-63D0-40C2-A8EC-4303C0B6AC95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77B0D6B2-63D0-40C2-A8EC-4303C0B6AC95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B567859-3921-4C8C-801C-8289A248728D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B567859-3921-4C8C-801C-8289A248728D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B567859-3921-4C8C-801C-8289A248728D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B567859-3921-4C8C-801C-8289A248728D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEDEF6F2-25F7-43BD-822F-62CD80ADDE43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEDEF6F2-25F7-43BD-822F-62CD80ADDE43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEDEF6F2-25F7-43BD-822F-62CD80ADDE43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEDEF6F2-25F7-43BD-822F-62CD80ADDE43}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {194C111E-FE47-4AA6-AB86-C0F37D064FB0}
+	EndGlobalSection
+EndGlobal
