@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "20RUdHXoIdHEc6FnVrojCkTW8QMPlx5BZ2GG0wRdzEE3EdDdpGNOfDm9IdkYPU5jG76WNLkDbWJ2NmrlKCk+dA==",
+  "dgSpecHash": "UcmYZ5uUad++tGYxVmwR99S1AYr0hxBXdwh6JeI7nomVqJg9LiH5CCiHCfw+1udW5d8ChjdbD5lRkajJtlSV2A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\RestaurantSoftware\\OpenRestaurant\\OpenRestRestaurant.Server\\OpenRestRestaurant-api\\api.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Rolando\\Desktop\\Code 2022\\RestaurantSoftware\\OpenRestaurant\\OpenRestRestaurant.Server\\OpenRestRestaurant-api\\OpenRestRestaurant-api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Rolando\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.0\\microsoft.aspnetcore.openapi.7.0.0.nupkg.sha512",
+    "C:\\Users\\Rolando\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\Rolando\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
+    "C:\\Users\\Rolando\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "C:\\Users\\Rolando\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "C:\\Users\\Rolando\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "C:\\Users\\Rolando\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
   "logs": []
 }
