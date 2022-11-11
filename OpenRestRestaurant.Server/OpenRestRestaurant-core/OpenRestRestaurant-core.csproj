@@ -1,16 +1,24 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>OpenRestRestaurant_core</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <!--<Nullable>enable</Nullable>-->
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\OpenRestRestaurant-data\OpenRestRestaurant-data.csproj" />
     <ProjectReference Include="..\OpenRestRestaurant-infrastructure\OpenRestRestaurant-infrastructure.csproj" />
     <ProjectReference Include="..\OpenRestRestaurant-models\OpenRestRestaurant-models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Backend\Services\Interfaces\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RestSharp" Version="108.0.2" />
   </ItemGroup>
 
 </Project>
