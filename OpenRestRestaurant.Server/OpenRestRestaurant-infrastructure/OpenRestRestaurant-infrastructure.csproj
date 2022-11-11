@@ -4,12 +4,8 @@
     <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>OpenRestRestaurant_infrastructure</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <!--<Nullable>enable</Nullable>-->
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\OpenRestRestaurant-data\OpenRestRestaurant-data.csproj" />
