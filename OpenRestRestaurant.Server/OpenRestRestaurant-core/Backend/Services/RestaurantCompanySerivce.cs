@@ -17,11 +17,12 @@ namespace OpenRestRestaurant_core.Backend.Services
         private readonly OpenRestRestaurantDbContext _dbContext;
         private readonly IApiCallerUtil _apiCallerUtil;
         private readonly AuthURLValue _authURLValue;
+        private readonly ITokenUtilHelper _tokenHelper;
 
         public RestaurantCompanySerivce(IRestaurantCompanyRepository restaurantCompanyRepo,
             IUserRepository userRepository, IRestaurantStaffRepository staffRepository,
             TransactionManager tmanager, OpenRestRestaurantDbContext dbContext,
-            IApiCallerUtil apiCallerUtil, AuthURLValue authURL)
+            IApiCallerUtil apiCallerUtil, AuthURLValue authURL, ITokenUtilHelper tokenHelper)
         {
             _restaurantCompanyRepository = restaurantCompanyRepo;
             _userRepository = userRepository;
@@ -30,7 +31,7 @@ namespace OpenRestRestaurant_core.Backend.Services
             _dbContext = dbContext;
             _apiCallerUtil = apiCallerUtil;
             _authURLValue = authURL;
-
+            _tokenHelper = tokenHelper;
         }
 
         public async Task<object> AddRestaurantCompany(NewCompanyRestaurantModel newRestaurant)
@@ -78,7 +79,8 @@ namespace OpenRestRestaurant_core.Backend.Services
                 Ssn = "AAAAAAAAAAA",
                 RestaurantCompanyId = restaurantCompany.Id,
                 UserId = user.Id,
-                CreationDate = DateTime.Now
+                CreationDate = DateTime.Now,
+                EmployeeType = 0,
             };
 
             Action transactionRestaurant = async () =>
@@ -93,6 +95,22 @@ namespace OpenRestRestaurant_core.Backend.Services
             await _dbContext.SaveChangesAsync();
 
             return new { restaurantID = restaurantCompany.Id, restaurantCompany.RestaurantNumber, restaurantCompany.CompanyName };
+        }
+
+        public Guid GetRestaurantIdFromToken(string bearerToken)
+        {
+            var tokenDecoded = _tokenHelper.GetTokenDataByStringValue(bearerToken);
+
+            var restaurantID = tokenDecoded.Claims.Where(W => W.Type == "restaurantID").FirstOrDefault().Value;
+            return Guid.Parse(restaurantID.ToUpper());
+        }
+
+        public int GetEmployeeTypeFromToken(string bearerToken)
+        {
+            var tokenDecoded = _tokenHelper.GetTokenDataByStringValue(bearerToken);
+
+            var restaurantID = tokenDecoded.Claims.Where(W => W.Type == "employeeType").FirstOrDefault().Value;
+            return int.Parse(restaurantID);
         }
     }
 }

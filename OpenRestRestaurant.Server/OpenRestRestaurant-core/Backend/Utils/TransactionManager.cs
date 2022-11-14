@@ -34,6 +34,7 @@ namespace OpenRestRestaurant_core.Backend.Utils
                 catch (Exception ex)
                 {
                     await transaction.RollbackAsync();
+                    throw new Exception("Exception on transaction: " + ex.Message);
                 }
             }
         }

@@ -24,12 +24,13 @@ builder.Services.AddSingleton<AuthURLValue>(op =>
 });
 
 builder.Services.InjectServices();
+await builder.Services.AddCustomAuthentication(_authUrl);
 
 builder.Services.AddDbContext<OpenRestRestaurantDbContext>(options => options.
        UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGenWithAuthentication();
 
 var app = builder.Build();
 
@@ -42,6 +43,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

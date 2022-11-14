@@ -35,6 +35,8 @@ public partial class RestaurantStaff
 
     public DateTime CreationDate { get; set; }
 
+    public int EmployeeType { get; set; }
+
     public virtual ICollection<Order> Orders { get; } = new List<Order>();
 
     public virtual RestaurantCompany RestaurantCompany { get; set; } = null!;

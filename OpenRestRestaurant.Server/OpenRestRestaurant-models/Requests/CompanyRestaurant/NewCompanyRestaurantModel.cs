@@ -8,7 +8,6 @@ namespace OpenRestRestaurant_models.Requests.CompanyRestaurant
 {
     public class NewCompanyRestaurantModel
     {
-        public long RestaurantNumber { get; set; }
         public string CompanyName { get; set; } 
         public string LegalOwner { get; set; }
         public string UserName { get; set; } 
