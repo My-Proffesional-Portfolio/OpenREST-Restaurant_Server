@@ -45,7 +45,7 @@ namespace OpenRestRestaurant_infrastructure.Repositories
             return await _dbContext.Set<TEntity>().ToListAsync();
         }
 
-        public virtual async Task<TEntity> GetByIdAsync(int id)
+        public virtual async Task<TEntity> GetByIdAsync(Guid id)
         {
             return await _dbContext.Set<TEntity>().FindAsync(id);
         }

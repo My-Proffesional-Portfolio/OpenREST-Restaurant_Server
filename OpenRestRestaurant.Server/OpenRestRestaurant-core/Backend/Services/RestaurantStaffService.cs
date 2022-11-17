@@ -43,7 +43,7 @@ namespace OpenRestRestaurant_core.Backend.Services
             }
 
             var restaurantID = _restaurantSC.GetRestaurantIdFromToken(token);
-            var newUser =await _userService.SaveUser(newUserStaff, saveOnCall: false);
+            var newUser = await _userService.SaveUser(newUserStaff, saveOnCall: false);
 
 
             var newRestaurantStaff = new RestaurantStaff()
