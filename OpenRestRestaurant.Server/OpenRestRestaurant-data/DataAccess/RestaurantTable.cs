@@ -19,7 +19,7 @@ public partial class RestaurantTable
 
     public DateTime CreationDate { get; set; }
 
-    public virtual ICollection<Order> Orders { get; } = new List<Order>();
+    public virtual ICollection<OrderTable> OrderTables { get; } = new List<OrderTable>();
 
     public virtual RestaurantLocation RestaurantLocation { get; set; } = null!;
 }

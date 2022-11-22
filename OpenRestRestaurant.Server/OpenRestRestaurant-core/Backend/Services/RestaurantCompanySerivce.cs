@@ -37,6 +37,12 @@ namespace OpenRestRestaurant_core.Backend.Services
         public async Task<object> AddRestaurantCompany(NewCompanyRestaurantModel newRestaurant)
         {
 
+            var userInDB = _userRepository.FindByExpresion(w => w.UserName == newRestaurant.UserName).FirstOrDefault();
+
+            if (userInDB != null)
+                throw new Exception("User already exist");
+
+
             var restaurantCompany = new RestaurantCompany()
             {
                 Id = Guid.NewGuid(),

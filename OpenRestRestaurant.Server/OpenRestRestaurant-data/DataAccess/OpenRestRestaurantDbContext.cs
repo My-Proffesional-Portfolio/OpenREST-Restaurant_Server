@@ -19,6 +19,8 @@ public partial class OpenRestRestaurantDbContext : DbContext
 
     public virtual DbSet<OrderItem> OrderItems { get; set; }
 
+    public virtual DbSet<OrderTable> OrderTables { get; set; }
+
     public virtual DbSet<ProductMeal> ProductMeals { get; set; }
 
     public virtual DbSet<RestaurantCompany> RestaurantCompanies { get; set; }
@@ -33,7 +35,7 @@ public partial class OpenRestRestaurantDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        //Scaffold-DbContext "Server=DESKTOP-VL2FT7Q\SQLEXPRESS;Database=OpenRestRestaurantDB;Trusted_Connection=True;Encrypt=False;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir DataAccess -F
+
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -45,7 +47,6 @@ public partial class OpenRestRestaurantDbContext : DbContext
             entity.Property(e => e.OpenOrderTime).HasColumnType("datetime");
             entity.Property(e => e.RestaurantCompanyId).HasColumnName("RestaurantCompanyID");
             entity.Property(e => e.StaffId).HasColumnName("StaffID");
-            entity.Property(e => e.TableId).HasColumnName("TableID");
 
             entity.HasOne(d => d.Location).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.LocationId)
@@ -61,10 +62,6 @@ public partial class OpenRestRestaurantDbContext : DbContext
                 .HasForeignKey(d => d.StaffId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Orders__StaffID__4CA06362");
-
-            entity.HasOne(d => d.Table).WithMany(p => p.Orders)
-                .HasForeignKey(d => d.TableId)
-                .HasConstraintName("FK__Orders__TableID__4AB81AF0");
         });
 
         modelBuilder.Entity<OrderItem>(entity =>
@@ -88,6 +85,23 @@ public partial class OpenRestRestaurantDbContext : DbContext
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__OrderItem__Produ__5441852A");
+        });
+
+        modelBuilder.Entity<OrderTable>(entity =>
+        {
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.OrderId).HasColumnName("OrderID");
+            entity.Property(e => e.TableId).HasColumnName("TableID");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.OrderTables)
+                .HasForeignKey(d => d.OrderId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__OrderTabl__Order__5DCAEF64");
+
+            entity.HasOne(d => d.Table).WithMany(p => p.OrderTables)
+                .HasForeignKey(d => d.TableId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__OrderTabl__Table__5CD6CB2B");
         });
 
         modelBuilder.Entity<ProductMeal>(entity =>

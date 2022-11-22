@@ -13,8 +13,6 @@ public partial class Order
 
     public DateTime? CloseOrderTime { get; set; }
 
-    public Guid? TableId { get; set; }
-
     public Guid LocationId { get; set; }
 
     public Guid StaffId { get; set; }
@@ -31,9 +29,9 @@ public partial class Order
 
     public virtual ICollection<OrderItem> OrderItems { get; } = new List<OrderItem>();
 
+    public virtual ICollection<OrderTable> OrderTables { get; } = new List<OrderTable>();
+
     public virtual RestaurantCompany RestaurantCompany { get; set; } = null!;
 
     public virtual RestaurantStaff Staff { get; set; } = null!;
-
-    public virtual RestaurantTable? Table { get; set; }
 }
