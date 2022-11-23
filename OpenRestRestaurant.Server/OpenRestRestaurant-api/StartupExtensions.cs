@@ -9,6 +9,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using OpenRestRestaurant_models.DTOs.Auth;
 using Microsoft.OpenApi.Models;
+using OpenRestRestaurant_core.Infrastructure.Services;
 
 namespace OpenRestRestaurant_api
 {
@@ -29,10 +30,10 @@ namespace OpenRestRestaurant_api
 
             services.AddScoped<IApiCallerUtil, ApiCallerUtil>();
             services.AddScoped<TransactionManager>();
-            services.AddScoped<RestaurantCompanySerivce>();
-            services.AddScoped<RestaurantStaffService>();
-            services.AddScoped<AccountService>();
-            services.AddScoped<UserService>();
+            services.AddScoped<IRestaurantCompanyService, RestaurantCompanyService>();
+            services.AddScoped<IRestaurantStaffService, RestaurantStaffService>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IUserService, UserService>();
             
 
 

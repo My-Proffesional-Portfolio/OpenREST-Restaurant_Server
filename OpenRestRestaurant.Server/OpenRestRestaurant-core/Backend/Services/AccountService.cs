@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OpenRestRestaurant_core.Backend.Utils.Interfaces;
+using OpenRestRestaurant_core.Infrastructure.Services;
 using OpenRestRestaurant_infrastructure.Repositories;
 using OpenRestRestaurant_infrastructure.Repositories.Interfaces;
 using OpenRestRestaurant_models;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace OpenRestRestaurant_core.Backend.Services
 {
-    public class AccountService
+    public class AccountService : IAccountService
     {
         public readonly IUserRepository _userRepository;
         private readonly AuthURLValue _authURLValue;
@@ -65,9 +66,6 @@ namespace OpenRestRestaurant_core.Backend.Services
 
             return authToken.token;
         }
-
-
-
 
     }
 }

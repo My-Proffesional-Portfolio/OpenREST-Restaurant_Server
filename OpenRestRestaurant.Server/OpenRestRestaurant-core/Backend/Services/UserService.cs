@@ -9,10 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenRestRestaurant_core.Backend.Utils.Interfaces;
 using OpenRestRestaurant_infrastructure.Repositories.Interfaces;
+using OpenRestRestaurant_core.Infrastructure.Services;
 
 namespace OpenRestRestaurant_core.Backend.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly IApiCallerUtil _apiCallerUtil;
         private readonly AuthURLValue _authURLValue;

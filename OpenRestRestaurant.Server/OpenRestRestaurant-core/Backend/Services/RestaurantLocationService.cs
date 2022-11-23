@@ -1,4 +1,5 @@
-﻿using OpenRestRestaurant_data.DataAccess;
+﻿using OpenRestRestaurant_core.Infrastructure.Services;
+using OpenRestRestaurant_data.DataAccess;
 using OpenRestRestaurant_infrastructure.Repositories.Interfaces;
 using OpenRestRestaurant_models.Requests.RestaurantLocation;
 using System;
@@ -9,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace OpenRestRestaurant_core.Backend.Services
 {
-    public class RestaurantLocationService
+    public class RestaurantLocationService : IRestaurantLocationService
     {
 
         private readonly OpenRestRestaurantDbContext _dbContext;
-        private readonly RestaurantCompanySerivce _restaurantSC;
+        private readonly IRestaurantCompanyService _restaurantSC;
         private readonly IUserRepository _userRepository;
         private readonly IRestaurantLocationRepository _locationRepository;
 
-        public RestaurantLocationService(OpenRestRestaurantDbContext dbContext, RestaurantCompanySerivce restaurantSC,
+        public RestaurantLocationService(OpenRestRestaurantDbContext dbContext, IRestaurantCompanyService restaurantSC,
             IUserRepository userRepository, IRestaurantLocationRepository locationRepository)
         {
             _dbContext = dbContext;

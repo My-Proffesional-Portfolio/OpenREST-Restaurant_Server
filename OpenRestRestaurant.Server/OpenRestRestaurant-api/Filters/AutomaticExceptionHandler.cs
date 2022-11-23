@@ -26,6 +26,14 @@ namespace OpenRestRestaurant_api.Filters
                     statusCode = HttpStatusCode.Unauthorized;
                     break;
 
+                case MissingRequestParamsException:
+                    statusCode = HttpStatusCode.BadRequest;
+                    break;
+
+                case NetworkCommunicationException:
+                    statusCode = HttpStatusCode.ServiceUnavailable;
+                    break;
+
                 default:
                     statusCode = HttpStatusCode.InternalServerError;
                     break;

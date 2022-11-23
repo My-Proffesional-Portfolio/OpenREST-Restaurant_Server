@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OpenRestRestaurant_api.Filters;
 using OpenRestRestaurant_core.Backend.Services;
+using OpenRestRestaurant_core.Infrastructure.Services;
 using OpenRestRestaurant_models;
 using OpenRestRestaurant_models.Requests.CompanyRestaurant;
 using OpenRestRestaurant_models.Requests.Staff;
@@ -16,12 +17,12 @@ namespace OpenRestRestaurant_api.Controllers
     public class AccountController : ControllerBase
     {
         // GET: api/<AccountController>
-        private readonly RestaurantCompanySerivce _restaurantSC;
-        private readonly RestaurantStaffService _staffSC;
+        private readonly IRestaurantCompanyService _restaurantSC;
+        private readonly IRestaurantStaffService _staffSC;
         private readonly AuthURLValue _authURLValue;
-        private readonly AccountService _accountSC;
-        public AccountController(RestaurantCompanySerivce restaurantSC, AuthURLValue authURL, 
-            RestaurantStaffService staffSC, AccountService accountSC)
+        private readonly IAccountService _accountSC;
+        public AccountController(IRestaurantCompanyService restaurantSC, AuthURLValue authURL, 
+            IRestaurantStaffService staffSC, IAccountService accountSC)
         {
             _restaurantSC = restaurantSC;
             _authURLValue = authURL;

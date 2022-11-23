@@ -11,19 +11,20 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections;
 using OpenRestRestaurant_core.Backend.Utils;
 using OpenRestRestaurant_infrastructure.Repositories.Interfaces;
+using OpenRestRestaurant_core.Infrastructure.Services;
 
 namespace OpenRestRestaurant_core.Backend.Services
 {
-    public class RestaurantStaffService
+    public class RestaurantStaffService : IRestaurantStaffService
     {
 
-        private readonly RestaurantCompanySerivce _restaurantSC;
-        private readonly UserService _userService;
+        private readonly IRestaurantCompanyService _restaurantSC;
+        private readonly IUserService _userService;
         private readonly TransactionManager _tManager;
         private readonly IRestaurantStaffRepository _staffRepository;
         private readonly OpenRestRestaurantDbContext _dbContext;
 
-        public RestaurantStaffService(RestaurantCompanySerivce restaurantSC, UserService userService,
+        public RestaurantStaffService(IRestaurantCompanyService restaurantSC, IUserService userService,
             TransactionManager tManager, IRestaurantStaffRepository staffRepository, OpenRestRestaurantDbContext dbContext)
         {
             _restaurantSC = restaurantSC;

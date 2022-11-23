@@ -11,4 +11,8 @@
     <Folder Include="Responses\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OpenRestRestaurant-data\OpenRestRestaurant-data.csproj" />
+  </ItemGroup>
+
 </Project>

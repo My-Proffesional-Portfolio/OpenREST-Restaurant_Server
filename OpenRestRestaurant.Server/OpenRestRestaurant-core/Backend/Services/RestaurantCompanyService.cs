@@ -1,5 +1,6 @@
 ﻿using OpenRestRestaurant_core.Backend.Utils;
 using OpenRestRestaurant_core.Backend.Utils.Interfaces;
+using OpenRestRestaurant_core.Infrastructure.Services;
 using OpenRestRestaurant_data.DataAccess;
 using OpenRestRestaurant_infrastructure.Repositories.Interfaces;
 using OpenRestRestaurant_models;
@@ -9,7 +10,7 @@ using OpenRestRestaurant_models.Requests.CompanyRestaurant;
 
 namespace OpenRestRestaurant_core.Backend.Services
 {
-    public class RestaurantCompanySerivce
+    public class RestaurantCompanyService : IRestaurantCompanyService
     {
         private readonly IRestaurantCompanyRepository _restaurantCompanyRepository;
         private readonly IUserRepository _userRepository;
@@ -20,7 +21,7 @@ namespace OpenRestRestaurant_core.Backend.Services
         private readonly AuthURLValue _authURLValue;
         private readonly ITokenUtilHelper _tokenHelper;
 
-        public RestaurantCompanySerivce(IRestaurantCompanyRepository restaurantCompanyRepo,
+        public RestaurantCompanyService(IRestaurantCompanyRepository restaurantCompanyRepo,
             IUserRepository userRepository, IRestaurantStaffRepository staffRepository,
             TransactionManager tmanager, OpenRestRestaurantDbContext dbContext,
             IApiCallerUtil apiCallerUtil, AuthURLValue authURL, ITokenUtilHelper tokenHelper)
