@@ -52,14 +52,15 @@ namespace OpenRestRestaurant_tests.IntegrationTests
             _restaurantCompanyRepo = new RestaurantCompanyRepository(_context);
             _staffRepo = new RestaurantStaffRepository(_context);
 
+            var integrationUUID = Guid.NewGuid();
 
-            _userNameDesired = "[integration-test.openrestaurant]user" + Guid.NewGuid();
-            _passwordDesired = "[integration-test.openrestaurant]password" + Guid.NewGuid();
+            _userNameDesired = "[integration-test.openrestaurant]user" + integrationUUID;
+            _passwordDesired = "[integration-test.openrestaurant]password" + integrationUUID;
 
 
             _integrationRestaurant = new NewCompanyRestaurantModel()
             {
-                CompanyName = "[integration-test.openrestaurant]CompanyName",
+                CompanyName = "[integration-test.openrestaurant]" + integrationUUID,
                 Name = "[integration-test.openrestaurant]Name",
                 FiscalAddress = "[integration-test.openrestaurant]FiscalAddress",
                 Email = "[integration-test.openrestaurant]Email",
