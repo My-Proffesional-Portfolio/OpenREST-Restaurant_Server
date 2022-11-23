@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>OpenRestRestaurant_tests</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.10" />
+    <PackageReference Include="coverlet.collector" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UnitTests\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OpenRestRestaurant-api\OpenRestRestaurant-api.csproj" />
+    <ProjectReference Include="..\OpenRestRestaurant-core\OpenRestRestaurant-core.csproj" />
+    <ProjectReference Include="..\OpenRestRestaurant-data\OpenRestRestaurant-data.csproj" />
+    <ProjectReference Include="..\OpenRestRestaurant-infrastructure\OpenRestRestaurant-infrastructure.csproj" />
+    <ProjectReference Include="..\OpenRestRestaurant-models\OpenRestRestaurant-models.csproj" />
+  </ItemGroup>
+
+</Project>
