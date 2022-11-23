@@ -1,4 +1,5 @@
 ﻿using OpenRestRestaurant_core.Backend.Utils.Interfaces;
+using OpenRestRestaurant_models.Exceptions;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace OpenRestRestaurant_core.Backend.Utils
             }
             catch (Exception ex)
             {
-                throw new Exception("An error has ocurred while attempting to receive or make external API request: " + ex.Message);
+                throw new NetworkCommunicationException("An error has ocurred while attempting to receive or make external API request: " + ex.Message);
             }
 
 

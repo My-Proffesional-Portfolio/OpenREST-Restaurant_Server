@@ -4,6 +4,7 @@ using OpenRestRestaurant_data.DataAccess;
 using OpenRestRestaurant_infrastructure.Repositories.Interfaces;
 using OpenRestRestaurant_models;
 using OpenRestRestaurant_models.DTOs.Auth;
+using OpenRestRestaurant_models.Exceptions;
 using OpenRestRestaurant_models.Requests.CompanyRestaurant;
 
 namespace OpenRestRestaurant_core.Backend.Services
@@ -40,7 +41,7 @@ namespace OpenRestRestaurant_core.Backend.Services
             var userInDB = _userRepository.FindByExpresion(w => w.UserName == newRestaurant.UserName).FirstOrDefault();
 
             if (userInDB != null)
-                throw new Exception("User already exist");
+                throw new UserIssueException("User already exist");
 
 
             var restaurantCompany = new RestaurantCompany()

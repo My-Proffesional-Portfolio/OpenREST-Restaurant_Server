@@ -4,6 +4,7 @@ using OpenRestRestaurant_infrastructure.Repositories;
 using OpenRestRestaurant_infrastructure.Repositories.Interfaces;
 using OpenRestRestaurant_models;
 using OpenRestRestaurant_models.DTOs.Auth;
+using OpenRestRestaurant_models.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,12 +28,15 @@ namespace OpenRestRestaurant_core.Backend.Services
 
         public async Task<string> Login(string userName, string password)
         {
+            if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
+                throw new MissingRequestParamsException("Username or password not privided");
+
             var user = _userRepository.FindByExpresion(w => w.UserName == userName).Include(i => i.RestaurantStaffs)
                 .FirstOrDefault();
 
             if (user == null)
             {
-                throw new Exception("User not found in database");
+                throw new UserIssueException("User not found in database");
             }
 
             var decryptPassword = await _apiCallerUtil.CallApiAsync<DecryptedPasswordResponseDTO>
@@ -40,11 +44,11 @@ namespace OpenRestRestaurant_core.Backend.Services
 
             if (decryptPassword.isError is not false)
             {
-                throw new Exception("An error occured trying to decrypt password " + decryptPassword.technicalMessage);
+                throw new AuthorizationException("An error occured trying to decrypt password " + decryptPassword.technicalMessage);
             }
 
             if (decryptPassword.PlainPassword != password)
-                throw new Exception("Provided password does not match with user");
+                throw new AuthorizationException("Provided password does not match with user");
 
             var tokenData = new List<KeyValuePair<string, string>>
             {
@@ -56,10 +60,13 @@ namespace OpenRestRestaurant_core.Backend.Services
             var authToken = await _apiCallerUtil.CallApiAsync<TokenResponseDTO>
              (_authURLValue.UrlValue, "generateToken", RestSharp.Method.Post, tokenData, null);
 
+            if (authToken == null || string.IsNullOrWhiteSpace(authToken.token))
+                throw new NetworkCommunicationException("An error has ocurred when trying to retrieve user token");
+
             return authToken.token;
         }
 
-       
+
 
 
     }

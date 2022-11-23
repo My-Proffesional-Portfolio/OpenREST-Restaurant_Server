@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OpenRestRestaurant_api.Filters;
 using OpenRestRestaurant_core.Backend.Services;
 using OpenRestRestaurant_models;
 using OpenRestRestaurant_models.Requests.CompanyRestaurant;
@@ -11,6 +12,7 @@ namespace OpenRestRestaurant_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AutomaticExceptionHandler]
     public class AccountController : ControllerBase
     {
         // GET: api/<AccountController>
@@ -34,17 +36,11 @@ namespace OpenRestRestaurant_api.Controllers
             var loginResult = await _accountSC.Login(userName, password);
             return loginResult;
         }
-
-        // GET api/<AccountController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
+  
         // POST api/<AccountController>
         [HttpPost]
         [Route("signup")]
+        
         public async Task<IActionResult> Post([FromBody] NewCompanyRestaurantModel restaurant)
         {
             var result = await _restaurantSC.AddRestaurantCompany(restaurant);
@@ -62,18 +58,6 @@ namespace OpenRestRestaurant_api.Controllers
 
             var result = await _staffSC.AddUserToRestaurantCompany(user, token);
             return Ok(result);
-        }
-
-        // PUT api/<AccountController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<AccountController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
