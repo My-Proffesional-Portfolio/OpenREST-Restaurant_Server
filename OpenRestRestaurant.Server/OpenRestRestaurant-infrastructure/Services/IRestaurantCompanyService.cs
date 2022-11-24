@@ -1,4 +1,5 @@
 ﻿using OpenRestRestaurant_models.Requests.CompanyRestaurant;
+using OpenRestRestaurant_models.Responses.CompanyRestaurants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace OpenRestRestaurant_core.Infrastructure.Services
 {
     public interface IRestaurantCompanyService
     {
-        Task<object> AddRestaurantCompany(NewCompanyRestaurantModel newRestaurant);
+        Task<NewCompanyRestaurantResponseModel> AddRestaurantCompany(NewCompanyRestaurantModel newRestaurant);
         Guid GetRestaurantIdFromToken(string bearerToken);
         int GetEmployeeTypeFromToken(string bearerToken);
     }

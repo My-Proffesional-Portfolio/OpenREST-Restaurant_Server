@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenRestRestaurant-api", "O
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenRestRestaurant-infrastructure", "OpenRestRestaurant-infrastructure\OpenRestRestaurant-infrastructure.csproj", "{616C1FB6-982A-4D64-B8F7-68F7DBE2475E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRestRestaurant-tests", "OpenRestRestaurant-tests\OpenRestRestaurant-tests.csproj", "{E6BFA7ED-D29C-4C1F-927E-DE3B04216074}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenRestRestaurant-tests", "OpenRestRestaurant-tests\OpenRestRestaurant-tests.csproj", "{E6BFA7ED-D29C-4C1F-927E-DE3B04216074}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenRestRestaurant-integration-tests", "OpenRestRestaurant-integration-tests\OpenRestRestaurant-integration-tests.csproj", "{56BB3104-74B7-439F-A400-C248D1BD3079}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{E6BFA7ED-D29C-4C1F-927E-DE3B04216074}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6BFA7ED-D29C-4C1F-927E-DE3B04216074}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6BFA7ED-D29C-4C1F-927E-DE3B04216074}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56BB3104-74B7-439F-A400-C248D1BD3079}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56BB3104-74B7-439F-A400-C248D1BD3079}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56BB3104-74B7-439F-A400-C248D1BD3079}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56BB3104-74B7-439F-A400-C248D1BD3079}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

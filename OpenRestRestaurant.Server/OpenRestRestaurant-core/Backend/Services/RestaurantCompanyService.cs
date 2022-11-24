@@ -7,6 +7,7 @@ using OpenRestRestaurant_models;
 using OpenRestRestaurant_models.DTOs.Auth;
 using OpenRestRestaurant_models.Exceptions;
 using OpenRestRestaurant_models.Requests.CompanyRestaurant;
+using OpenRestRestaurant_models.Responses.CompanyRestaurants;
 
 namespace OpenRestRestaurant_core.Backend.Services
 {
@@ -36,7 +37,7 @@ namespace OpenRestRestaurant_core.Backend.Services
             _tokenHelper = tokenHelper;
         }
 
-        public async Task<object> AddRestaurantCompany(NewCompanyRestaurantModel newRestaurant)
+        public async Task<NewCompanyRestaurantResponseModel> AddRestaurantCompany(NewCompanyRestaurantModel newRestaurant)
         {
 
             var userInDB = _userRepository.FindByExpresion(w => w.UserName == newRestaurant.UserName).FirstOrDefault();
@@ -102,7 +103,12 @@ namespace OpenRestRestaurant_core.Backend.Services
             await _tManager.RunTransaction(transactionRestaurant);
             await _dbContext.SaveChangesAsync();
 
-            return new { restaurantID = restaurantCompany.Id, restaurantCompany.RestaurantNumber, restaurantCompany.CompanyName };
+            return new NewCompanyRestaurantResponseModel
+            {
+                RestaurantID = restaurantCompany.Id,
+                RestaurantNumber = restaurantCompany.RestaurantNumber,
+                CompanyName = restaurantCompany.CompanyName
+            };
         }
 
         public Guid GetRestaurantIdFromToken(string bearerToken)

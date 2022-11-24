@@ -32,10 +32,10 @@ namespace OpenRestRestaurant_api.Controllers
 
         [Route("login")]
         [HttpGet()]
-        public async Task<string> login(string userName, string password)
+        public async Task<IActionResult> login(string userName, string password)
         {
             var loginResult = await _accountSC.Login(userName, password);
-            return loginResult;
+            return Ok(loginResult);
         }
   
         // POST api/<AccountController>

@@ -14,7 +14,7 @@ using OpenRestRestaurant_models.Requests.CompanyRestaurant;
 namespace OpenRestRestaurant_tests.IntegrationTests
 {
     [TestClass]
-    public class LoginTest
+    public class TestServices
     {
         private OpenRestRestaurantDbContext _context;
         private string _urlAuthApiValue;
@@ -83,7 +83,7 @@ namespace OpenRestRestaurant_tests.IntegrationTests
         }
 
         [TestMethod]
-        public void CreateAndLogin()
+        public void TestingServices()
         {
             
             var newIntegrationRestaurant = _restaurantCompanyService.AddRestaurantCompany(_integrationRestaurant).GetAwaiter().GetResult();
