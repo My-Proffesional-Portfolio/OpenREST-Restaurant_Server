@@ -38,7 +38,7 @@ namespace OpenRestRestaurant_integration_tests.Models
         public string city { get; set; }
         public string state { get; set; }
         public string country { get; set; }
-        public int postcode { get; set; }
+        public dynamic postcode { get; set; }
         public Coordinates coordinates { get; set; }
         public Timezone timezone { get; set; }
     }
