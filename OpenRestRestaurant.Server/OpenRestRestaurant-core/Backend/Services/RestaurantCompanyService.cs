@@ -55,6 +55,7 @@ namespace OpenRestRestaurant_core.Backend.Services
                 FiscalId = newRestaurant.FiscalId,
                 LegalOwner = newRestaurant.LegalOwner,
                 CreationDate = DateTime.Now,
+                IsTestingResult = newRestaurant.CompanyName.EndsWith("Restaurant[|*--TEST--*|]")
             };
 
             var passwordAndSalt = await _apiCallerUtil.CallApiAsync<EncryptResponseDTO>

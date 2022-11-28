@@ -70,7 +70,7 @@ namespace OpenRestRestaurant_integration_tests
             var integrationUUID = Guid.NewGuid();
             _listNewRestaurants = new List<NewCompanyRestaurantModel>();
 
-            Root apiResponse = apiCaller.CallApiAsync<Root>("https://randomuser.me/", "api/?results=500", RestSharp.Method.Get, null, null).GetAwaiter().GetResult();
+            Root apiResponse = apiCaller.CallApiAsync<Root>("https://randomuser.me/", "api/?results=5", RestSharp.Method.Get, null, null).GetAwaiter().GetResult();
 
 
             if (apiResponse is null)
@@ -108,7 +108,7 @@ namespace OpenRestRestaurant_integration_tests
 
                     _integrationRestaurant = new NewCompanyRestaurantModel()
                     {
-                        CompanyName = fakeUser.name.first + " Restaurant[|*TEST*|]",
+                        CompanyName = fakeUser.name.first + " Restaurant[|*--TEST--*|]",
                         Name = fakeUser.name.first,
                         FiscalAddress = fakeUser.location.street.name + "# " + fakeUser.location.street.number
                         + " - " + fakeUser.location.city + ", " + fakeUser.location.state,
@@ -139,21 +139,25 @@ namespace OpenRestRestaurant_integration_tests
 
             foreach (var item in _listNewRestaurants)
             {
-                var newIntegratedRestaurant = _accountController.Post(item).GetAwaiter().GetResult();
+                try
+                {
+                    var newIntegratedRestaurant = _accountController.Post(item).GetAwaiter().GetResult();
 
-                var okObjNewRestaurant = newIntegratedRestaurant as OkObjectResult;
-                var valueResponseNewRestaurant = okObjNewRestaurant.Value;
+                    var okObjNewRestaurant = newIntegratedRestaurant as OkObjectResult;
+                    var valueResponseNewRestaurant = okObjNewRestaurant.Value;
 
-                var tokenResult = _accountController.login(item.UserName, item.Password).GetAwaiter().GetResult();
+                    var tokenResult = _accountController.login(item.UserName, item.Password).GetAwaiter().GetResult();
 
-                var okObjLogin = tokenResult as OkObjectResult;
-                var valueResponseLogin = okObjLogin.Value;
+                    var okObjLogin = tokenResult as OkObjectResult;
+                    var valueResponseLogin = okObjLogin.Value;
 
-                Assert.IsTrue(okObjNewRestaurant.StatusCode == 200);
-                Assert.IsNotNull(valueResponseNewRestaurant);
+                    Assert.IsTrue(okObjNewRestaurant.StatusCode == 200);
+                    Assert.IsNotNull(valueResponseNewRestaurant);
 
-                Assert.IsTrue(okObjLogin.StatusCode == 200);
-                Assert.IsNotNull(valueResponseLogin);
+                    Assert.IsTrue(okObjLogin.StatusCode == 200);
+                    Assert.IsNotNull(valueResponseLogin);
+                }
+                catch (Exception ex) { }
             }
             
 

@@ -21,6 +21,8 @@ public partial class RestaurantCompany
 
     public DateTime CreationDate { get; set; }
 
+    public bool IsTestingResult { get; set; }
+
     public virtual ICollection<Order> Orders { get; } = new List<Order>();
 
     public virtual ICollection<RestaurantLocation> RestaurantLocations { get; } = new List<RestaurantLocation>();

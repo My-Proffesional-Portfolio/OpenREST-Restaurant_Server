@@ -60,7 +60,7 @@ namespace OpenRestRestaurant_tests.IntegrationTests
 
             _integrationRestaurant = new NewCompanyRestaurantModel()
             {
-                CompanyName = "[integration-test.openrestaurant]" + integrationUUID,
+                CompanyName = "[integration-test.openrestaurant]" + integrationUUID + "Restaurant[|*--TEST--*|]",
                 Name = "[integration-test.openrestaurant]Name",
                 FiscalAddress = "[integration-test.openrestaurant]FiscalAddress",
                 Email = "[integration-test.openrestaurant]Email",

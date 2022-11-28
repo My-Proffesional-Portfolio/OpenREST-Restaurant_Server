@@ -68,7 +68,7 @@ namespace OpenRestRestaurant_tests.IntegrationTests
 
             _integrationRestaurant = new NewCompanyRestaurantModel()
             {
-                CompanyName = "[integration-test.openrestaurant-AccountController]" + integrationUUID,
+                CompanyName = "[integration-test.openrestaurant-AccountController]" + integrationUUID + "Restaurant[|*--TEST--*|]",
                 Name = "[integration-test.openrestaurant-AccountController]Name",
                 FiscalAddress = "[integration-test.openrestaurant-AccountController]FiscalAddress",
                 Email = "[integration-test.openrestaurant-AccountController]Email",
