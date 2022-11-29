@@ -4,6 +4,7 @@ using OpenRestRestaurant_core.Infrastructure.Services;
 using OpenRestRestaurant_infrastructure.Repositories;
 using OpenRestRestaurant_infrastructure.Repositories.Interfaces;
 using OpenRestRestaurant_models;
+using OpenRestRestaurant_models.Catalogs;
 using OpenRestRestaurant_models.DTOs.Auth;
 using OpenRestRestaurant_models.Exceptions;
 using System;
@@ -17,17 +18,19 @@ namespace OpenRestRestaurant_core.Backend.Services
     public class AccountService : IAccountService
     {
         public readonly IUserRepository _userRepository;
+        public readonly IRestaurantStaffRepository _restaurantStaffRepository;
         private readonly AuthURLValue _authURLValue;
         private readonly IApiCallerUtil _apiCallerUtil;
 
-        public AccountService(IUserRepository userRepository, AuthURLValue authURLValue, IApiCallerUtil apiCallerUtil)
+        public AccountService(IUserRepository userRepository, AuthURLValue authURLValue, IApiCallerUtil apiCallerUtil, IRestaurantStaffRepository restaurantStaffRepository)
         {
             _userRepository = userRepository;
             _authURLValue = authURLValue;
             _apiCallerUtil = apiCallerUtil;
+            _restaurantStaffRepository = restaurantStaffRepository;
         }
 
-        public async Task<string> Login(string userName, string password)
+        public async Task<object> Login(string userName, string password)
         {
             if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
                 throw new MissingRequestParamsException("Username or password not privided");
@@ -64,7 +67,17 @@ namespace OpenRestRestaurant_core.Backend.Services
             if (authToken == null || string.IsNullOrWhiteSpace(authToken.token))
                 throw new NetworkCommunicationException("An error has ocurred when trying to retrieve user token");
 
-            return authToken.token;
+            var staffPersonal = _restaurantStaffRepository.FindByExpresion(w => w.UserId == user.Id).FirstOrDefault();
+
+            return new
+            {
+                token = authToken.token,
+                userName = user.UserName,
+                staffPersonal = staffPersonal.Name + " " + staffPersonal.LastName,
+                restaurantID = staffPersonal.RestaurantCompanyId,
+                employeeType = staffPersonal.EmployeeType,
+                userID = user.Id,
+            };
         }
 
     }

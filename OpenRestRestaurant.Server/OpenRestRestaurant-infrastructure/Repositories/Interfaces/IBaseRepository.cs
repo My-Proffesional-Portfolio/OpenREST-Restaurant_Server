@@ -11,6 +11,7 @@ namespace OpenRestRestaurant_infrastructure.Repositories.Interfaces
     public interface IBaseRepository<TEntity> where TEntity : class
     {
         public Task AddAsync(TEntity entity);
+        public Task AddRangeAsync (IEnumerable<TEntity> entities);
         public  void DeleteAsync(TEntity entity);
         public  void DeleteRangeAsync(IEnumerable<TEntity> entities);
         public  IQueryable<TEntity> FindByExpresion(Expression<Func<TEntity, bool>> expression);

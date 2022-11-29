@@ -1,4 +1,5 @@
-﻿using OpenRestRestaurant_core.Infrastructure.Services;
+﻿using OpenRestRestaurant_core.Backend.Utils;
+using OpenRestRestaurant_core.Infrastructure.Services;
 using OpenRestRestaurant_data.DataAccess;
 using OpenRestRestaurant_infrastructure.Repositories.Interfaces;
 using OpenRestRestaurant_models.Requests.RestaurantLocation;
@@ -17,19 +18,24 @@ namespace OpenRestRestaurant_core.Backend.Services
         private readonly IRestaurantCompanyService _restaurantSC;
         private readonly IUserRepository _userRepository;
         private readonly IRestaurantLocationRepository _locationRepository;
+        private readonly IRestaurantTableRepository _tablesRepository;
+        private readonly TransactionManager _tmanager;
 
         public RestaurantLocationService(OpenRestRestaurantDbContext dbContext, IRestaurantCompanyService restaurantSC,
-            IUserRepository userRepository, IRestaurantLocationRepository locationRepository)
+            IUserRepository userRepository, IRestaurantLocationRepository locationRepository, TransactionManager transactionManager,
+            IRestaurantTableRepository tablesRepository)
         {
             _dbContext = dbContext;
             _userRepository = userRepository;
             _restaurantSC = restaurantSC;
             _locationRepository = locationRepository;
+            _tmanager = transactionManager;
+            _tablesRepository = tablesRepository;
         }
 
         public async Task<object> AddNewLocationToRestaurant(NewRestaurantLocationModel newLocation, string token)
         {
-
+            List<RestaurantTable> restaurantTablesDB = new List<RestaurantTable>();
             var employeeType = _restaurantSC.GetEmployeeTypeFromToken(token);
 
             if (employeeType != 0)
@@ -39,7 +45,7 @@ namespace OpenRestRestaurant_core.Backend.Services
 
             var desiredManagerUser = await _userRepository.GetByIdAsync(newLocation.ManagerUserID);
 
-            if (desiredManagerUser != null)
+            if (desiredManagerUser == null)
             {
                 throw new Exception("Provided user Id for manager not found");
             }
@@ -58,7 +64,29 @@ namespace OpenRestRestaurant_core.Backend.Services
                 RestaurantCompanyId = restaurantID,
             };
 
-            await _locationRepository.AddAsync(newRestaurantLocation);
+            if (newLocation.Tables != null && newLocation.Tables.Count > 0)
+            {
+                foreach ( var table in newLocation.Tables )
+                {
+                    var newTable = new RestaurantTable();
+                    newTable.Id = Guid.NewGuid();
+                    newTable.CreationDate = DateTime.Now;
+                    newTable.TableNumber =  table.TableNumber;
+                    newTable.RestaurantLocationId = newRestaurantLocation.Id;
+                    newTable.IsActive = true;
+                    newTable.TableCapacity = table.TableCapacity;
+                    newTable.UicoordLocation = "";
+                    restaurantTablesDB.Add(newTable);
+                }
+                
+            }
+
+            await _tmanager.RunTransaction(async () =>
+            {
+                await _locationRepository.AddAsync(newRestaurantLocation);
+                await _tablesRepository.AddRangeAsync(restaurantTablesDB);
+            });
+
             _dbContext.SaveChanges();
 
             return new

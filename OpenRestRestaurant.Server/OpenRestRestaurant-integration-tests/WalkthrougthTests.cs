@@ -65,7 +65,7 @@ namespace OpenRestRestaurant_integration_tests
             _restaurantSC = new RestaurantCompanyService(_restaurantCompanyRepo, _userRepo,
                 _staffRepo, new TransactionManager(_context), _context, apiCaller, authURL, new TokenUtilHelper());
 
-            _accountSC = new AccountService(_userRepo, authURL, apiCaller);
+            _accountSC = new AccountService(_userRepo, authURL, apiCaller, _staffRepo);
 
             var integrationUUID = Guid.NewGuid();
             _listNewRestaurants = new List<NewCompanyRestaurantModel>();
@@ -126,7 +126,7 @@ namespace OpenRestRestaurant_integration_tests
 
                     _listNewRestaurants.Add(_integrationRestaurant);
                 }
-                
+
             }
             _accountController = new AccountController(_restaurantSC, _authURLValue, _staffSC, _accountSC);
 
@@ -159,7 +159,7 @@ namespace OpenRestRestaurant_integration_tests
                 }
                 catch (Exception ex) { }
             }
-            
+
 
 
         }

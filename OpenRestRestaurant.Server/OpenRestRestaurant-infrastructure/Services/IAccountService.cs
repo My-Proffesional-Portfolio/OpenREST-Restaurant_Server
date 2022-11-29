@@ -8,6 +8,6 @@ namespace OpenRestRestaurant_core.Infrastructure.Services
 {
     public interface IAccountService
     {
-        Task<string> Login(string userName, string password);
+        Task<object> Login(string userName, string password);
     }
 }

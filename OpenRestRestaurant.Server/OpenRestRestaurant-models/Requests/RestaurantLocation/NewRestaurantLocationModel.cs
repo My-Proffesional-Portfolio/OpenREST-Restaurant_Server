@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenRestRestaurant_models.Requests.RestaurantTable;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace OpenRestRestaurant_models.Requests.RestaurantLocation
     {
         public NewRestaurantLocationModel()
         {
-            this.Tables = new List<LocationTableItemModel>();
+            this.Tables = new List<LocationTableModel>();
         }
         public string LocationAlias { get; set; }
         public string LocationAddress { get; set; }
@@ -18,11 +19,7 @@ namespace OpenRestRestaurant_models.Requests.RestaurantLocation
         public string FiscalID { get; set; }
         public string LocationPhone { get; set; }
         public string LocationEmail { get; set; }
-        public List<LocationTableItemModel> Tables { get; set; }
+        public List<LocationTableModel> Tables { get; set; }
     }
 
-    public class LocationTableItemModel
-    {
-
-    }
 }

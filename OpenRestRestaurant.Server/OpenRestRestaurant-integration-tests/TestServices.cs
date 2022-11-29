@@ -26,6 +26,7 @@ namespace OpenRestRestaurant_tests.IntegrationTests
         private IAccountService _accountSC;
         private IRestaurantCompanyService _restaurantCompanyService;
         private IRestaurantStaffService _restaurantStaffService;
+        private IRestaurantTableRepository _tableRepo;
         private NewCompanyRestaurantModel _integrationRestaurant;
 
         [TestInitialize]
@@ -51,6 +52,7 @@ namespace OpenRestRestaurant_tests.IntegrationTests
             _userRepo = new UserRepository(_context);
             _restaurantCompanyRepo = new RestaurantCompanyRepository(_context);
             _staffRepo = new RestaurantStaffRepository(_context);
+            _tableRepo = new RestaurantTableRepository(_context);
 
             var integrationUUID = Guid.NewGuid();
 
@@ -79,7 +81,7 @@ namespace OpenRestRestaurant_tests.IntegrationTests
             _restaurantCompanyService = new RestaurantCompanyService(_restaurantCompanyRepo, _userRepo,
                 _staffRepo, new TransactionManager(_context), _context, apiCaller, authURL, new TokenUtilHelper());
 
-            _accountSC = new AccountService(_userRepo, authURL, apiCaller);
+            _accountSC = new AccountService(_userRepo, authURL, apiCaller, _staffRepo);
         }
 
         [TestMethod]
@@ -89,7 +91,7 @@ namespace OpenRestRestaurant_tests.IntegrationTests
             var newIntegrationRestaurant = _restaurantCompanyService.AddRestaurantCompany(_integrationRestaurant).GetAwaiter().GetResult();
             var token = _accountSC.Login(_userNameDesired, _passwordDesired).GetAwaiter().GetResult();
 
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(token));
+            Assert.IsNotNull(token);
         }
     }
 }

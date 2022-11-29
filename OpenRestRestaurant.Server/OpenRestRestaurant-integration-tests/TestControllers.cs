@@ -28,6 +28,7 @@ namespace OpenRestRestaurant_tests.IntegrationTests
         private IUserRepository _userRepo;
         private IRestaurantCompanyRepository _restaurantCompanyRepo;
         private IRestaurantStaffRepository _staffRepo;
+        private IRestaurantTableRepository _tableRepo;
         private NewCompanyRestaurantModel _integrationRestaurant;
         private string _userNameDesired;
         private string _passwordDesired;
@@ -52,6 +53,7 @@ namespace OpenRestRestaurant_tests.IntegrationTests
             _userRepo = new UserRepository(_context);
             _restaurantCompanyRepo = new RestaurantCompanyRepository(_context);
             _staffRepo = new RestaurantStaffRepository(_context);
+            _tableRepo = new RestaurantTableRepository(_context);
 
             var authURL = new AuthURLValue() { UrlValue = _urlAuthApiValue };
             var apiCaller = new ApiCallerUtil();
@@ -59,7 +61,7 @@ namespace OpenRestRestaurant_tests.IntegrationTests
             _restaurantSC = new RestaurantCompanyService(_restaurantCompanyRepo, _userRepo,
                 _staffRepo, new TransactionManager(_context), _context, apiCaller, authURL, new TokenUtilHelper());
 
-            _accountSC = new AccountService(_userRepo, authURL, apiCaller);
+            _accountSC = new AccountService(_userRepo, authURL, apiCaller, _staffRepo);
 
             var integrationUUID = Guid.NewGuid();
 

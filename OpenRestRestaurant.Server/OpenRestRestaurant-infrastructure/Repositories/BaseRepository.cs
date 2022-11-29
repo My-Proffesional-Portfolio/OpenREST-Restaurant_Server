@@ -25,6 +25,11 @@ namespace OpenRestRestaurant_infrastructure.Repositories
             await _dbContext.AddAsync(entity);
         }
 
+        public virtual async Task AddRangeAsync(IEnumerable<TEntity> entities)
+        {
+            await _dbContext.AddRangeAsync(entities);
+        }
+
         public virtual void DeleteAsync(TEntity entity)
         {
             _dbContext.Remove(entity);
