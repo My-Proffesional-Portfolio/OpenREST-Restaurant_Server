@@ -2,6 +2,7 @@
 using OpenRestRestaurant_core.Infrastructure.Services;
 using OpenRestRestaurant_data.DataAccess;
 using OpenRestRestaurant_infrastructure.Repositories.Interfaces;
+using OpenRestRestaurant_models.Exceptions;
 using OpenRestRestaurant_models.Requests.RestaurantLocation;
 using System;
 using System.Collections.Generic;
@@ -16,17 +17,17 @@ namespace OpenRestRestaurant_core.Backend.Services
 
         private readonly OpenRestRestaurantDbContext _dbContext;
         private readonly IRestaurantCompanyService _restaurantSC;
-        private readonly IUserRepository _userRepository;
+        private readonly IRestaurantStaffRepository _staffRepository;
         private readonly IRestaurantLocationRepository _locationRepository;
         private readonly IRestaurantTableRepository _tablesRepository;
         private readonly TransactionManager _tmanager;
 
         public RestaurantLocationService(OpenRestRestaurantDbContext dbContext, IRestaurantCompanyService restaurantSC,
-            IUserRepository userRepository, IRestaurantLocationRepository locationRepository, TransactionManager transactionManager,
+            IRestaurantStaffRepository staffRepository, IRestaurantLocationRepository locationRepository, TransactionManager transactionManager,
             IRestaurantTableRepository tablesRepository)
         {
             _dbContext = dbContext;
-            _userRepository = userRepository;
+            _staffRepository = staffRepository;
             _restaurantSC = restaurantSC;
             _locationRepository = locationRepository;
             _tmanager = transactionManager;
@@ -43,11 +44,12 @@ namespace OpenRestRestaurant_core.Backend.Services
 
             var restaurantID = _restaurantSC.GetRestaurantIdFromToken(token);
 
-            var desiredManagerUser = await _userRepository.GetByIdAsync(newLocation.ManagerUserID);
+            var desiredManagerStaffUser = await _staffRepository.GetByIdAsync(newLocation.ManagerStaffUserID);
 
-            if (desiredManagerUser == null)
+            if (desiredManagerStaffUser == null || desiredManagerStaffUser.RestaurantCompanyId != restaurantID)
             {
-                throw new Exception("Provided user Id for manager not found");
+                throw new UserIssueException("Provided user Id for manager not found");
+
             }
 
             var newRestaurantLocation = new RestaurantLocation()
@@ -59,32 +61,33 @@ namespace OpenRestRestaurant_core.Backend.Services
                 FiscalId = newLocation.FiscalID,
                 LocationEmail = newLocation.LocationEmail,
                 LocationPhone = newLocation.LocationPhone,
-                ManagerId = desiredManagerUser.Id,
+                ManagerId = desiredManagerStaffUser.Id,
                 LocationName = newLocation.LocationAlias,
                 RestaurantCompanyId = restaurantID,
             };
 
             if (newLocation.Tables != null && newLocation.Tables.Count > 0)
             {
-                foreach ( var table in newLocation.Tables )
+                foreach (var table in newLocation.Tables)
                 {
                     var newTable = new RestaurantTable();
                     newTable.Id = Guid.NewGuid();
                     newTable.CreationDate = DateTime.Now;
-                    newTable.TableNumber =  table.TableNumber;
+                    newTable.TableNumber = table.TableNumber;
                     newTable.RestaurantLocationId = newRestaurantLocation.Id;
                     newTable.IsActive = true;
                     newTable.TableCapacity = table.TableCapacity;
                     newTable.UicoordLocation = "";
                     restaurantTablesDB.Add(newTable);
                 }
-                
+
             }
 
             await _tmanager.RunTransaction(async () =>
             {
                 await _locationRepository.AddAsync(newRestaurantLocation);
-                await _tablesRepository.AddRangeAsync(restaurantTablesDB);
+                if (restaurantTablesDB != null && restaurantTablesDB.Count > 0)
+                    await _tablesRepository.AddRangeAsync(restaurantTablesDB);
             });
 
             _dbContext.SaveChanges();

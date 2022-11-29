@@ -15,7 +15,7 @@ namespace OpenRestRestaurant_models.Requests.RestaurantLocation
         }
         public string LocationAlias { get; set; }
         public string LocationAddress { get; set; }
-        public Guid ManagerUserID { get; set; }
+        public Guid ManagerStaffUserID { get; set; }
         public string FiscalID { get; set; }
         public string LocationPhone { get; set; }
         public string LocationEmail { get; set; }

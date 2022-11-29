@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using OpenRestRestaurant_models.DTOs.Auth;
 using Microsoft.OpenApi.Models;
 using OpenRestRestaurant_core.Infrastructure.Services;
+using OpenRestRestaurant_data.DataAccess;
 
 namespace OpenRestRestaurant_api
 {
@@ -26,12 +27,15 @@ namespace OpenRestRestaurant_api
             services.AddScoped<IRestaurantStaffRepository, RestaurantStaffRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProductMealRepository, ProductMealRepositoy>();
-            services.AddScoped<IProductMealRepository, ProductMealRepositoy>();
+            services.AddScoped<IRestaurantLocationRepository, RestaurantLocationRepository>();
+            services.AddScoped<IRestaurantTableRepository, RestaurantTableRepository>();
+            
 
             services.AddScoped<IApiCallerUtil, ApiCallerUtil>();
             services.AddScoped<TransactionManager>();
             services.AddScoped<IRestaurantCompanyService, RestaurantCompanyService>();
             services.AddScoped<IRestaurantStaffService, RestaurantStaffService>();
+            services.AddScoped<IRestaurantLocationService, RestaurantLocationService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IUserService, UserService>();
             
