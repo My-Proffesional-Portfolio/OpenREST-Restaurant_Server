@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenRestRestaurant_models.Responses.Account;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace OpenRestRestaurant_core.Infrastructure.Services
 {
     public interface IAccountService
     {
-        Task<object> Login(string userName, string password);
+        Task<LoginResponseModel> Login(string userName, string password);
     }
 }

@@ -17,6 +17,10 @@ using OpenRestRestaurant_core.Backend.Utils.Interfaces;
 using OpenRestRestaurant_core.Backend.Utils;
 using OpenRestRestaurant_infrastructure.Repositories;
 using OpenRestRestaurant_integration_tests.Models;
+using Microsoft.AspNetCore.Http;
+using OpenRestRestaurant_models.Responses.Account;
+using OpenRestRestaurant_models.Requests.Staff;
+using OpenRestRestaurant_models.Catalogs;
 
 namespace OpenRestRestaurant_integration_tests
 {
@@ -28,6 +32,8 @@ namespace OpenRestRestaurant_integration_tests
         private IRestaurantStaffService _staffSC;
         private AuthURLValue _authURLValue;
         private IAccountService _accountSC;
+        private TransactionManager _tmanager;
+        private IUserService _userSC;
         private OpenRestRestaurantDbContext _context;
         private string _urlAuthApiValue;
         private IUserRepository _userRepo;
@@ -62,9 +68,14 @@ namespace OpenRestRestaurant_integration_tests
             var authURL = new AuthURLValue() { UrlValue = _urlAuthApiValue };
             var apiCaller = new ApiCallerUtil();
 
-            _restaurantSC = new RestaurantCompanyService(_restaurantCompanyRepo, _userRepo,
-                _staffRepo, new TransactionManager(_context), _context, apiCaller, authURL, new TokenUtilHelper());
+            _tmanager = new TransactionManager(_context);
 
+            _restaurantSC = new RestaurantCompanyService(_restaurantCompanyRepo, _userRepo,
+                _staffRepo, _tmanager, _context, apiCaller, authURL, new TokenUtilHelper());
+
+            _userSC = new UserService(apiCaller, authURL, _userRepo, _context);
+
+            _staffSC = new RestaurantStaffService(_restaurantSC, _userSC, _tmanager, _staffRepo, _context);
             _accountSC = new AccountService(_userRepo, authURL, apiCaller, _staffRepo);
 
             var integrationUUID = Guid.NewGuid();
@@ -135,34 +146,72 @@ namespace OpenRestRestaurant_integration_tests
         [TestMethod]
         public void TestingControllers()
         {
-
-
             foreach (var item in _listNewRestaurants)
             {
                 try
                 {
-                    var newIntegratedRestaurant = _accountController.Post(item).GetAwaiter().GetResult();
-
-                    var okObjNewRestaurant = newIntegratedRestaurant as OkObjectResult;
-                    var valueResponseNewRestaurant = okObjNewRestaurant.Value;
-
-                    var tokenResult = _accountController.login(item.UserName, item.Password).GetAwaiter().GetResult();
-
-                    var okObjLogin = tokenResult as OkObjectResult;
-                    var valueResponseLogin = okObjLogin.Value;
-
-                    Assert.IsTrue(okObjNewRestaurant.StatusCode == 200);
-                    Assert.IsNotNull(valueResponseNewRestaurant);
-
-                    Assert.IsTrue(okObjLogin.StatusCode == 200);
-                    Assert.IsNotNull(valueResponseLogin);
+                    CreateRestaurantCompany(item);
+                    SaveNewUserToken(item);
+                    var staffInfo = CreateStaffEmployee(item);
+                   
                 }
                 catch (Exception ex) { }
             }
-
-
-
         }
 
+        private void CreateRestaurantCompany(NewCompanyRestaurantModel item)
+        {
+            var newIntegratedRestaurant = _accountController.Post(item).GetAwaiter().GetResult();
+
+            var okObjNewRestaurant = newIntegratedRestaurant as OkObjectResult;
+            var valueResponseNewRestaurant = okObjNewRestaurant.Value;
+
+            Assert.IsTrue(okObjNewRestaurant.StatusCode == 200);
+            Assert.IsNotNull(valueResponseNewRestaurant);
+        }
+
+        private void SaveNewUserToken (NewCompanyRestaurantModel item)
+        {
+            var tokenResult = _accountController.login(item.UserName, item.Password).GetAwaiter().GetResult();
+
+            var httpContext = new DefaultHttpContext();
+            var okObjLogin = tokenResult as OkObjectResult;
+            var valueResponseLogin = (LoginResponseModel)okObjLogin.Value;
+
+            httpContext.Request.Headers["Authorization"] = "Bearer " + valueResponseLogin.token;
+
+            _accountController.ControllerContext = new ControllerContext()
+            {
+                HttpContext = httpContext
+            };
+
+            Assert.IsTrue(okObjLogin.StatusCode == 200);
+            Assert.IsNotNull(valueResponseLogin);
+        }
+
+        private NewStaffEmployeeResponseModel CreateStaffEmployee(NewCompanyRestaurantModel item)
+        {
+            var newStaffUser = new NewStaffUserModel()
+            {
+                Name = "ITesting[Name]",
+                Address = "ITesting[Address]",
+                FiscalId = "ITesting[FiscalId]",
+                LastName = "ITesting[LastName]",
+                NewEmployeeType = EmployeeType.LocationManager,
+                UserName = item.UserName + Guid.NewGuid(),
+                Password = _passwordDesired,
+                PersonalEmail = "ITmail",
+                PersonalPhone = "000000000123",
+                SurName = "Simpson",
+                Ssn = "fakeSSN123",
+                UserEmail = "fakemail@me.com"
+            };
+
+            var newUserStaff = _accountController.Post(newStaffUser).GetAwaiter().GetResult();
+            var okObjNewStaff = newUserStaff as OkObjectResult;
+            var valueResponseNewStaff = (NewStaffEmployeeResponseModel)okObjNewStaff.Value;
+
+            return valueResponseNewStaff;
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace OpenRestRestaurant_models.Catalogs
     public class EmployeeType
     {
         public const int SystemAdministrator = 0;
+        public const int LocationManager = 1;
     }
 }

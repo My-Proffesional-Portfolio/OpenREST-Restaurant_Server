@@ -7,6 +7,7 @@ using OpenRestRestaurant_models;
 using OpenRestRestaurant_models.Catalogs;
 using OpenRestRestaurant_models.DTOs.Auth;
 using OpenRestRestaurant_models.Exceptions;
+using OpenRestRestaurant_models.Responses.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace OpenRestRestaurant_core.Backend.Services
             _restaurantStaffRepository = restaurantStaffRepository;
         }
 
-        public async Task<object> Login(string userName, string password)
+        public async Task<LoginResponseModel> Login(string userName, string password)
         {
             if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
                 throw new MissingRequestParamsException("Username or password not privided");
@@ -69,7 +70,7 @@ namespace OpenRestRestaurant_core.Backend.Services
 
             var staffPersonal = _restaurantStaffRepository.FindByExpresion(w => w.UserId == user.Id).FirstOrDefault();
 
-            return new
+            return new LoginResponseModel
             {
                 token = authToken.token,
                 userName = user.UserName,

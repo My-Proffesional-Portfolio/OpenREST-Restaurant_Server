@@ -4,6 +4,7 @@ using OpenRestRestaurant_api.Controllers;
 using OpenRestRestaurant_core.Infrastructure.Services;
 using OpenRestRestaurant_models;
 using OpenRestRestaurant_models.Requests.CompanyRestaurant;
+using OpenRestRestaurant_models.Responses.Account;
 using OpenRestRestaurant_models.Responses.CompanyRestaurants;
 using System;
 using System.Collections.Generic;
@@ -60,7 +61,7 @@ namespace OpenRestRestaurant_tests.OpenRestRestaurant_api
         public void LoginTest()
         {
             _accountMockSC.Setup(s => s.Login(It.IsAny<string>(), It.IsAny<string>()))
-                .ReturnsAsync("eymdba_mockedToken");
+                .ReturnsAsync(new LoginResponseModel() { token = "eyjsjf...mockedToken"});
 
             var result = _accountController.login("mockedUser", "mockedPassword").GetAwaiter().GetResult();
 

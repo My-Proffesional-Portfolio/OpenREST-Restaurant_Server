@@ -12,6 +12,7 @@ using System.Collections;
 using OpenRestRestaurant_core.Backend.Utils;
 using OpenRestRestaurant_infrastructure.Repositories.Interfaces;
 using OpenRestRestaurant_core.Infrastructure.Services;
+using OpenRestRestaurant_models.Responses.Account;
 
 namespace OpenRestRestaurant_core.Backend.Services
 {
@@ -33,7 +34,7 @@ namespace OpenRestRestaurant_core.Backend.Services
             _staffRepository = staffRepository;
             _dbContext = dbContext;
         }
-        public async Task<object> AddUserToRestaurantCompany (NewStaffUserModel newUserStaff, string token)
+        public async Task<NewStaffEmployeeResponseModel> AddUserToRestaurantCompany(NewStaffUserModel newUserStaff, string token)
         {
 
             var employeeType = _restaurantSC.GetEmployeeTypeFromToken(token);
@@ -64,7 +65,7 @@ namespace OpenRestRestaurant_core.Backend.Services
                 UserId = newUser.Id,
                 EmployeeType = newUserStaff.NewEmployeeType,
                 RestaurantLocationId = newUserStaff.LocationId,
-                RestaurantCompanyId =  restaurantID
+                RestaurantCompanyId = restaurantID
             };
 
             Action transactionRestaurant = async () =>
@@ -75,7 +76,11 @@ namespace OpenRestRestaurant_core.Backend.Services
             await _tManager.RunTransaction(transactionRestaurant);
             await _dbContext.SaveChangesAsync();
 
-            return new { restaurantStaffId = newRestaurantStaff.Id, userID = newUser.Id};
+            return new NewStaffEmployeeResponseModel
+            {
+                RestaurantStaffId = newRestaurantStaff.Id,
+                UserID = newUser.Id
+            };
         }
     }
 }
