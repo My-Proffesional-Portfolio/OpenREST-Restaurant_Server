@@ -21,6 +21,8 @@ using Microsoft.AspNetCore.Http;
 using OpenRestRestaurant_models.Responses.Account;
 using OpenRestRestaurant_models.Requests.Staff;
 using OpenRestRestaurant_models.Catalogs;
+using OpenRestRestaurant_models.Requests.RestaurantLocation;
+using OpenRestRestaurant_models.Requests.RestaurantTable;
 
 namespace OpenRestRestaurant_integration_tests
 {
@@ -34,16 +36,20 @@ namespace OpenRestRestaurant_integration_tests
         private IAccountService _accountSC;
         private TransactionManager _tmanager;
         private IUserService _userSC;
+        private IRestaurantLocationService _locationSC;
         private OpenRestRestaurantDbContext _context;
         private string _urlAuthApiValue;
         private IUserRepository _userRepo;
         private IRestaurantCompanyRepository _restaurantCompanyRepo;
         private IRestaurantStaffRepository _staffRepo;
+        private IRestaurantLocationRepository _locationRepo;
+        private IRestaurantTableRepository _tableRepo;
         private NewCompanyRestaurantModel _integrationRestaurant;
         private List<NewCompanyRestaurantModel> _listNewRestaurants;
         private string _userNameDesired;
         private string _passwordDesired;
         private AccountController _accountController;
+        private LocationsController _locationController;
 
         [TestInitialize]
         public void Setup()
@@ -64,6 +70,8 @@ namespace OpenRestRestaurant_integration_tests
             _userRepo = new UserRepository(_context);
             _restaurantCompanyRepo = new RestaurantCompanyRepository(_context);
             _staffRepo = new RestaurantStaffRepository(_context);
+            _locationRepo = new RestaurantLocationRepository(_context);
+            _tableRepo = new RestaurantTableRepository(_context);
 
             var authURL = new AuthURLValue() { UrlValue = _urlAuthApiValue };
             var apiCaller = new ApiCallerUtil();
@@ -77,6 +85,7 @@ namespace OpenRestRestaurant_integration_tests
 
             _staffSC = new RestaurantStaffService(_restaurantSC, _userSC, _tmanager, _staffRepo, _context);
             _accountSC = new AccountService(_userRepo, authURL, apiCaller, _staffRepo);
+            _locationSC = new RestaurantLocationService(_context, _restaurantSC, _staffRepo, _locationRepo, _tmanager, _tableRepo);
 
             var integrationUUID = Guid.NewGuid();
             _listNewRestaurants = new List<NewCompanyRestaurantModel>();
@@ -140,6 +149,7 @@ namespace OpenRestRestaurant_integration_tests
 
             }
             _accountController = new AccountController(_restaurantSC, _authURLValue, _staffSC, _accountSC);
+            _locationController = new LocationsController(_locationSC);
 
         }
 
@@ -153,6 +163,7 @@ namespace OpenRestRestaurant_integration_tests
                     CreateRestaurantCompany(item);
                     SaveNewUserToken(item);
                     var staffInfo = CreateStaffEmployee(item);
+                    CreateLocationsWithTables(staffInfo.RestaurantStaffId);
                    
                 }
                 catch (Exception ex) { }
@@ -185,6 +196,11 @@ namespace OpenRestRestaurant_integration_tests
                 HttpContext = httpContext
             };
 
+            _locationController.ControllerContext = new ControllerContext()
+            {
+                HttpContext = httpContext
+            };
+
             Assert.IsTrue(okObjLogin.StatusCode == 200);
             Assert.IsNotNull(valueResponseLogin);
         }
@@ -212,6 +228,40 @@ namespace OpenRestRestaurant_integration_tests
             var valueResponseNewStaff = (NewStaffEmployeeResponseModel)okObjNewStaff.Value;
 
             return valueResponseNewStaff;
+        }
+
+        private void CreateLocationsWithTables(Guid staffID)
+        {
+            var newLocationWithTables = new NewRestaurantLocationModel()
+            {
+                FiscalID = "ITesting[FiscalId]",
+                LocationAddress = "ITesting[LocationAddress]",
+                LocationAlias = "ITTesting location restaurant",
+                LocationEmail = "ITTestingmail@mail.com",
+                LocationPhone = "ITTestng 214234456",
+                ManagerStaffUserID = staffID,
+                Tables = new List<LocationTableModel>()
+                        {
+                            new LocationTableModel()
+                            {
+                                TableCapacity = 6,
+                                TableNumber = "1A"
+                            },
+                            new LocationTableModel()
+                            {
+                                TableCapacity = 4,
+                                TableNumber = "2A"
+                            },
+                            new LocationTableModel()
+                            {
+                                TableCapacity = 6,
+                                TableNumber = "3A"
+                            }
+                        }
+            };
+
+            _locationController.Post(newLocationWithTables).GetAwaiter().GetResult();
+
         }
     }
 }
