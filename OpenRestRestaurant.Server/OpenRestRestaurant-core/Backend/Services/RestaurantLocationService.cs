@@ -4,6 +4,7 @@ using OpenRestRestaurant_data.DataAccess;
 using OpenRestRestaurant_infrastructure.Repositories.Interfaces;
 using OpenRestRestaurant_models.Exceptions;
 using OpenRestRestaurant_models.Requests.RestaurantLocation;
+using OpenRestRestaurant_models.Responses.Locations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,13 +35,13 @@ namespace OpenRestRestaurant_core.Backend.Services
             _tablesRepository = tablesRepository;
         }
 
-        public async Task<object> AddNewLocationToRestaurant(NewRestaurantLocationModel newLocation, string token)
+        public async Task<LocationTablesResponseModel> AddNewLocationToRestaurant(NewRestaurantLocationModel newLocation, string token)
         {
             List<RestaurantTable> restaurantTablesDB = new List<RestaurantTable>();
             var employeeType = _restaurantSC.GetEmployeeTypeFromToken(token);
 
             if (employeeType != 0)
-                throw new Exception("User cannot add location, need escalation");
+                throw new UserIssueException("User cannot add location, need escalation");
 
             var restaurantID = _restaurantSC.GetRestaurantIdFromToken(token);
 
@@ -92,10 +93,11 @@ namespace OpenRestRestaurant_core.Backend.Services
 
             _dbContext.SaveChanges();
 
-            return new
+            return new LocationTablesResponseModel
             {
-                locationID = newRestaurantLocation.Id,
-                locationName = newRestaurantLocation.LocationName
+                LocationID = newRestaurantLocation.Id,
+                LocationName = newRestaurantLocation.LocationName,
+                TablesCount = newRestaurantLocation.RestaurantTables == null ? 0 : newRestaurantLocation.RestaurantTables.Count(),
             };
 
         }

@@ -1,4 +1,5 @@
 ﻿using OpenRestRestaurant_models.Requests.RestaurantLocation;
+using OpenRestRestaurant_models.Responses.Locations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace OpenRestRestaurant_core.Infrastructure.Services
 {
     public interface IRestaurantLocationService
     {
-        Task<object> AddNewLocationToRestaurant(NewRestaurantLocationModel newLocation, string token);
+        Task<LocationTablesResponseModel> AddNewLocationToRestaurant(NewRestaurantLocationModel newLocation, string token);
     }
 }
