@@ -82,9 +82,21 @@ namespace OpenRestRestaurant_core.Backend.Services
         }
 
 
-        public async Task<object> GetUsersList()
+        public async Task<object> GetUsersList(Guid companyRestaurantID)
         {
-            var data = await _userRepository.GetAllPagedAsync(0, 10, sorter: (o => o.CreationDate));
+
+            var restaurantStaffsUsers =  _restaurantStaffRepository.FindByExpresion(w => w.RestaurantCompanyId == companyRestaurantID)
+                .Include(i=> i.User).Select(s=> s.User);
+
+
+            //I´ve spend 1 hour here trying to do it in the opposite way! the answer was go througt restaurant staff and not from users!!
+            //var usersQuery = await _userRepository.GetAllAsync();
+            //var usersStaff = usersQuery.AsQueryable().Include(th => th.RestaurantStaffs);
+            //var userSM = usersStaff.Select(sm => sm.RestaurantStaffs).ToList();
+            //    .Where(w => w.RestaurantCompanyId == companyRestaurantID);
+            //var u = userSM.Select(s => s.User);
+
+            var data = await _userRepository.GetAllPagedAsync(0, 10, sorter: (o => o.CreationDate), restaurantStaffsUsers);
             return data;
 
         }

@@ -51,9 +51,10 @@ namespace OpenRestRestaurant_infrastructure.Repositories
             return await _dbContext.Set<TEntity>().ToListAsync();
         }
 
-        public async Task<PaginationListEntityDTO<TEntity>> GetAllPagedAsync<T>(int page, int pageSize, Expression<Func<TEntity, T>> sorter)
+        public async Task<PaginationListEntityDTO<TEntity>> GetAllPagedAsync<T>(int page, int pageSize, Expression<Func<TEntity, T>> sorter, IEnumerable<TEntity> filterableEntityQry = null)
         {
-            var allData = await GetAllAsync();
+            IEnumerable<TEntity> allData = filterableEntityQry == null ? await GetAllAsync() : filterableEntityQry;
+
             var dataCount = allData.Count();
             var totalPages = Math.Ceiling((decimal)dataCount / pageSize);
 

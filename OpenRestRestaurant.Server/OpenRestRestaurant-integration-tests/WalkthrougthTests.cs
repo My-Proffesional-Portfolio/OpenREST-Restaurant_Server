@@ -263,7 +263,7 @@ namespace OpenRestRestaurant_integration_tests
             var locationTables = _locationController.Post(newLocationWithTables).GetAwaiter().GetResult();
 
             var locationTablesObjOk = locationTables as OkObjectResult;
-            var valueLocationTables =  ()
+            //var valueLocationTables =  ()
 
         }
     }

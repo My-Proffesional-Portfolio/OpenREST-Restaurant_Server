@@ -9,7 +9,7 @@ namespace OpenRestRestaurant_core.Infrastructure.Services
 {
     public interface IAccountService
     {
-        Task<object> GetUsersList();
+        Task<object> GetUsersList(Guid companyRestaurantID);
         Task<LoginResponseModel> Login(string userName, string password);
     }
 }

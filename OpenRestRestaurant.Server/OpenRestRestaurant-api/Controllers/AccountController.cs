@@ -14,7 +14,7 @@ namespace OpenRestRestaurant_api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [AutomaticExceptionHandler]
-    public class AccountController : ControllerBase
+    public class AccountController : BaseApiController
     {
         // GET: api/<AccountController>
         private readonly IRestaurantCompanyService _restaurantSC;
@@ -40,9 +40,11 @@ namespace OpenRestRestaurant_api.Controllers
 
         [Route("usersList")]
         [HttpGet()]
+        [Authorize]
         public async Task<IActionResult> UsersList()
         {
-            var loginResult = await _accountSC.GetUsersList();
+            var companyID = _restaurantSC.GetRestaurantIdFromToken(GetBearerTokenFromHeader());
+            var loginResult = await _accountSC.GetUsersList(companyID);
             return Ok(loginResult);
         }
 
