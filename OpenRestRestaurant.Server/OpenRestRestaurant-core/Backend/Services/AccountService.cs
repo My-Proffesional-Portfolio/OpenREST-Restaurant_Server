@@ -6,6 +6,7 @@ using OpenRestRestaurant_infrastructure.Repositories.Interfaces;
 using OpenRestRestaurant_models;
 using OpenRestRestaurant_models.Catalogs;
 using OpenRestRestaurant_models.DTOs.Auth;
+using OpenRestRestaurant_models.DTOs.Pagination;
 using OpenRestRestaurant_models.Exceptions;
 using OpenRestRestaurant_models.Responses.Account;
 using System;
@@ -82,12 +83,15 @@ namespace OpenRestRestaurant_core.Backend.Services
         }
 
 
-        public async Task<object> GetUsersList(Guid companyRestaurantID)
+        public async Task<object> GetUsersList(Guid companyRestaurantID, int page, int itemsPerPage, string searchTerm = null)
         {
 
-            var restaurantStaffsUsers =  _restaurantStaffRepository.FindByExpresion(w => w.RestaurantCompanyId == companyRestaurantID)
-                .Include(i=> i.User).Select(s=> s.User);
+            var restaurantStaffsUsers = _restaurantStaffRepository
+                .FindByExpresion(w => w.RestaurantCompanyId == companyRestaurantID)
+                .Include(i => i.User).ThenInclude(i2 => i2.RestaurantStaffs).Select(s => s.User).AsQueryable();
 
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+                restaurantStaffsUsers = restaurantStaffsUsers.Where(w => w.UserName.Contains(searchTerm));
 
             //I´ve spend 1 hour here trying to do it in the opposite way! the answer was go througt restaurant staff and not from users!!
             //var usersQuery = await _userRepository.GetAllAsync();
@@ -96,8 +100,25 @@ namespace OpenRestRestaurant_core.Backend.Services
             //    .Where(w => w.RestaurantCompanyId == companyRestaurantID);
             //var u = userSM.Select(s => s.User);
 
-            var data = await _userRepository.GetAllPagedAsync(0, 10, sorter: (o => o.CreationDate), restaurantStaffsUsers);
-            return data;
+            var data = await _userRepository.GetAllPagedAsync(page, itemsPerPage, sorter: (o => o.CreationDate), restaurantStaffsUsers);
+
+            var response = new PaginationListEntityDTO<UserItemModel>();
+            response.TotalPages = data.TotalPages;
+            response.TotalCount = data.TotalCount;
+            response.PageNumber = data.PageNumber;
+            response.PagedList = new List<UserItemModel>();
+
+            response.PagedList = data.PagedList.Select(s => new UserItemModel
+            {
+                UserName = s.UserName,
+                Email = s.Email,
+                Phone = s.RestaurantStaffs.FirstOrDefault().PersonalPhone,
+                LastName = s.RestaurantStaffs.FirstOrDefault().LastName,
+                Name = s.RestaurantStaffs.FirstOrDefault().Name,
+                UserId =  s.Id
+            }).ToList();
+
+            return response;
 
         }
     }

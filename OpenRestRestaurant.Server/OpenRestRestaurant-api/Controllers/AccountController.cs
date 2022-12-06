@@ -41,10 +41,10 @@ namespace OpenRestRestaurant_api.Controllers
         [Route("usersList")]
         [HttpGet()]
         [Authorize]
-        public async Task<IActionResult> UsersList()
+        public async Task<IActionResult> UsersList(int page, int itemsPerPage, string searchTerm = null)
         {
             var companyID = _restaurantSC.GetRestaurantIdFromToken(GetBearerTokenFromHeader());
-            var loginResult = await _accountSC.GetUsersList(companyID);
+            var loginResult = await _accountSC.GetUsersList(companyID, page, itemsPerPage, searchTerm);
             return Ok(loginResult);
         }
 
