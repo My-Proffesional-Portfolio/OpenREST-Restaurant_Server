@@ -81,5 +81,12 @@ namespace OpenRestRestaurant_core.Backend.Services
             };
         }
 
+
+        public async Task<object> GetUsersList()
+        {
+            var data = await _userRepository.GetAllPagedAsync(0, 10, sorter: (o => o.CreationDate));
+            return data;
+
+        }
     }
 }

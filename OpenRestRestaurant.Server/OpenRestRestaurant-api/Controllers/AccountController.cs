@@ -37,7 +37,16 @@ namespace OpenRestRestaurant_api.Controllers
             var loginResult = await _accountSC.Login(userName, password);
             return Ok(loginResult);
         }
-  
+
+        [Route("usersList")]
+        [HttpGet()]
+        public async Task<IActionResult> UsersList()
+        {
+            var loginResult = await _accountSC.GetUsersList();
+            return Ok(loginResult);
+        }
+
+
         // POST api/<AccountController>
         [HttpPost]
         [Route("signup")]
